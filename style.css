@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Rock+Salt&family=Space+Mono:wght@400;700&family=Marck+Script&display=swap');
+
+.font-marck { font-family: 'Marck Script', cursive; }
+
+html, body {
+  background-color: #06070B;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar { display: none; }
+
+/* MASTER MULTI-LAYER FIXED BACKGROUND CONTAINER */
+#master-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background-color: #06070B;
+  opacity: 1;
+}
+
+/* LAYER 0: VANTA MOVING SHADER */
+#vanta-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.10;
+  pointer-events: none;
+}
+
+/* LAYER 1: WEBB366 SWIRL TEXTURE OVERLAY */
+#master-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.05;
+  mix-blend-mode: screen;
+  filter: contrast(1.2) saturate(1.1);
+  transform: scale(1.06);
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* UNIFIED TRANSPARENCY - ELIMINATES SECTION BACKGROUND SHADING */
+.pinned-layer,
+#scroll-wrapper,
+section,
+footer {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  position: relative;
+  z-index: 10;
+}
+
+#hero-canvas {
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+  will-change: transform;
+  display: block;
+  opacity: 1;
+}
+
+#starfield-canvas {
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+#hero-loader.is-done { opacity: 0; }
+
+#surreal-nav {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+}
+
+.cinema-lens-frame {
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 35px rgba(0, 240, 255, 0.2);
+}
+
+.thermal-btn {
+  background: linear-gradient(135deg, #FF007A, #00F0FF, #FFB800, #FF3300);
+  background-size: 300% 300%;
+  animation: thermalShift 6s ease infinite;
+}
+
+.stroke-text {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+}
+
+/* CONTINUOUS AMBIENT THERMAL GLOWS */
+.thermal-glow {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  max-width: 650px;
+  max-height: 650px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(28px);
+  opacity: 0.18;
+}
+.thermal-glow--warm {
+  background: radial-gradient(circle, rgba(255,140,60,0.12) 0%, rgba(255,60,80,0.03) 50%, transparent 75%);
+}
+.thermal-glow--cool {
+  background: radial-gradient(circle, rgba(0,240,255,0.10) 0%, rgba(0,80,255,0.03) 50%, transparent 75%);
+}
+
+/* VISUAL NARRATIVES — 3D CAROUSEL */
+#ring-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+}
+#ring-stage:active { cursor: grabbing; }
+
+#ring-carousel { position: relative; width: 220px; height: 300px; }
+.ring-item {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 20px 50px rgba(0,0,0,.7);
+  backface-visibility: hidden;
+  background: rgba(255,255,255,0.03);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.ring-item:hover {
+  border-color: rgba(0, 240, 255, 0.8);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+}
+.ring-item img {
+  width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none;
+}
+
+/* LIGHTBOX MODAL */
+#lightbox-modal {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#lightbox-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* TIMELINE FROSTED GLASS POPUPS */
+.glass-popup {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  width: 230px;
+  z-index: 60;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+.top-node .glass-popup { top: 26px; }
+.top-node:hover .glass-popup,
+.top-node:focus-within .glass-popup {
+  opacity: 1; visibility: visible; transform: translateX(-50%) translateY(4px);
+}
+.bottom-node .glass-popup { bottom: 26px; }
+.bottom-node:hover .glass-popup,
+.bottom-node:focus-within .glass-popup {
+  opacity: 1; visibility: visible; transform: translateX(-50%) translateY(-4px);
+}
+
+.timeline-stacked #timeline-container { width: 100% !important; transform: none !important; }
+.timeline-stacked .timeline-rail { display: none; }
+.timeline-stacked .timeline-nodes {
+  flex-direction: column;
+  gap: 3rem;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+.timeline-stacked .top-node,
+.timeline-stacked .bottom-node {
+  height: auto !important;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  border-left: 2px solid rgba(0, 240, 255, 0.35);
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+.timeline-stacked .tl-dot {
+  position: static !important;
+  transform: none !important;
+  margin-bottom: 0.75rem;
+}
+.timeline-stacked .tl-above,
+.timeline-stacked .tl-below {
+  position: static !important;
+  transform: none !important;
+  width: 100% !important;
+  text-align: left !important;
+  bottom: auto !important;
+  top: auto !important;
+}
+.timeline-stacked .tl-above { order: -1; margin-bottom: 0.75rem; }
+.timeline-stacked .glass-popup {
+  position: static;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  width: 100%;
+  margin-top: 0.75rem;
+}
+.timeline-stacked .timeline-closer { width: 100%; margin-top: 1rem; border-left: none; padding-left: 0; }
+
+@keyframes thermalShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+.animate-blink { animation: blink 1s step-end infinite; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  #surreal-nav { top: 1rem; right: 1rem; gap: 1rem; padding: 0.5rem 1rem; }
+  #surreal-nav a { font-size: 10px; }
+  #ring-carousel { width: 150px; height: 210px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thermal-btn,
+  .animate-blink,
+  .ring-item { transition: none !important; }
+  .thermal-btn { background-position: 50% 50%; }
+  #surreal-nav { opacity: 1; visibility: visible; transform: none; }
+  html { scroll-behavior: auto; }
+}
