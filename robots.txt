@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Direct crawlers straight to your clean address
+Sitemap: https://mendechu1.netlify.app/sitemap.xml
