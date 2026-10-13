@@ -1,0 +1,8 @@
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    # Tells search bots to cache pages but always revalidate metadata tags on updates
+    Cache-Control = "public, max-age=0, must-revalidate"
